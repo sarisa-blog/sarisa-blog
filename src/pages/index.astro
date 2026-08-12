@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 5);
+---
+
+<BaseLayout
+  title="Sarisa"
+  description="Estrutura acima de narrativa. Análise técnica de macro, derivativos e engenharia de portfólio para quem já entende o básico."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="kicker">Sarisa</p>
+      <h1>Estrutura acima de narrativa.</h1>
+      <p class="lede">
+        Macro, derivativos e engenharia de portfólio com o rigor de quem precifica,
+        não de quem convence. Sem simplificar pra buscar alcance.
+      </p>
+      <a class="cta" href="/blog">Ler o blog →</a>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Últimos posts</h2>
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}/`}>
+            <span class="post-date">
+              {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' })}
+            </span>
+            <span class="post-title">{post.data.title}</span>
+            <span class="post-desc">{post.data.description}</span>
+          </a>
+        </li>
+      ))}
+      {posts.length === 0 && <p class="empty">Nenhum post publicado ainda.</p>}
+    </ul>
+  </section>
+
+  <style>
+    .hero {
+      padding: 5rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 0.5rem 0 1rem;
+    }
+    .lede {
+      font-size: 1.15rem;
+      color: var(--text-body);
+      max-width: 34rem;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    section.container {
+      padding: 3rem 0;
+    }
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    .post-list li {
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .post-list a {
+      display: block;
+      padding: 1.25rem 0;
+      color: inherit;
+    }
+    .post-list a:hover {
+      text-decoration: none;
+    }
+    .post-list a:hover .post-title {
+      color: var(--gold);
+    }
+    .post-date {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+    .post-title {
+      display: block;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .post-desc {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-top: 0.25rem;
+    }
+    .empty {
+      color: var(--text-muted);
+    }
+  </style>
+</BaseLayout>

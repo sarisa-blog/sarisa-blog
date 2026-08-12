@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const categorias = {
+  derivativos: 'Derivativos',
+  macro: 'Macro',
+  'renda-e-carregamento': 'Renda e Carregamento',
+  cases: 'Cases',
+  filosofia: 'Filosofia',
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { '@type': 'Organization', name: 'Sarisa' },
+  publisher: { '@type': 'Organization', name: 'Sarisa' },
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={post.data.heroImage}
+  article={{
+    publishedTime: post.data.pubDate.toISOString(),
+    modifiedTime: post.data.updatedDate?.toISOString(),
+    tags: post.data.tags,
+  }}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="container post">
+    <p class="kicker">
+      <span class="badge">{categorias[post.data.categoria]}</span>
+    </p>
+    <h1>{post.data.title}</h1>
+    <p class="post-meta">
+      {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' })}
+      {post.data.updatedDate && (
+        <> · atualizado em {post.data.updatedDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' })}</>
+      )}
+    </p>
+
+    {post.data.contemDadosIlustrativos && (
+      <p class="ilustrativo-note">
+        ⚠ Este post contém números ilustrativos/exemplo usados para explicar a mecânica —
+        não são cotações reais de mercado. Ver nota no corpo do texto.
+      </p>
+    )}
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {post.data.tags.length > 0 && (
+      <div class="tags">
+        {post.data.tags.map((tag) => <span class="badge">{tag}</span>)}
+      </div>
+    )}
+
+    <p class="disclaimer">
+      Conteúdo informativo e educacional — não constitui recomendação de investimento.
+      Operações com opções e derivativos envolvem risco, inclusive de perda superior ao
+      capital alocado.
+    </p>
+  </article>
+
+  <style>
+    .post {
+      padding: 3rem 0 4rem;
+    }
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin: 0.5rem 0 0.75rem;
+    }
+    .post-meta {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 2rem;
+    }
+    .ilustrativo-note {
+      background: var(--bg-elevated);
+      border-left: 3px solid var(--gold-dim);
+      padding: 0.75rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 2rem;
+    }
+    .prose {
+      font-size: 1.05rem;
+    }
+    .prose :global(h2) {
+      margin-top: 2.5rem;
+      font-size: 1.5rem;
+    }
+    .prose :global(h3) {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+    .prose :global(p) {
+      margin: 1.1rem 0;
+    }
+    .prose :global(ul),
+    .prose :global(ol) {
+      padding-left: 1.4rem;
+    }
+    .prose :global(li) {
+      margin: 0.4rem 0;
+    }
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+    }
+    .disclaimer {
+      margin-top: 2rem;
+    }
+  </style>
+</BaseLayout>

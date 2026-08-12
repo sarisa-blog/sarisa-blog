@@ -1,0 +1,144 @@
+:root {
+  --bg: #0b0b0b;
+  --bg-elevated: #141414;
+  --bg-card: #161616;
+  --gold: #c9a84c;
+  --gold-dim: #7a6530;
+  --text: #e5e5e5;
+  --text-body: #cdcdcd;
+  --text-muted: #9a9a9a;
+  --border: #2a2a2a;
+  --border-dim: #1e1e1e;
+  --pos: #4a9d78;
+  --neg: #c0524a;
+
+  --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+
+  --content-w: 42rem;
+  --wide-w: 60rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+code, pre {
+  font-family: 'Cascadia Code', 'Consolas', monospace;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+}
+code {
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+}
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 3px solid var(--gold);
+  background: var(--bg-elevated);
+  color: var(--text-body);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+}
+th {
+  background: var(--bg-elevated);
+  color: var(--gold);
+  font-weight: 600;
+}
+tr:nth-child(even) td {
+  background: var(--bg-elevated);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+.container {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+.container-wide {
+  max-width: var(--wide-w);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.kicker {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--gold-dim);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.disclaimer {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
