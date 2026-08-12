@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blog.sarisa.com.br/sitemap-index.xml
+Sitemap: https://sarisa.com.br/sitemap-index.xml

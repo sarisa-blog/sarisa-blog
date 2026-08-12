@@ -3,9 +3,9 @@ import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
 
-// TODO: trocar pelo dominio definitivo assim que a Sarisa registrar
-// (necessario pra sitemap/RSS/canonical gerarem URLs absolutas corretas)
-const SITE_URL = 'https://blog.sarisa.com.br';
+// Dominio registrado em 12/08/2026 (GoDaddy/.com.br) — usado como raiz do site,
+// nao subdominio, pra concentrar toda a autoridade de SEO num lugar so.
+const SITE_URL = 'https://sarisa.com.br';
 
 // https://astro.build/config
 export default defineConfig({
