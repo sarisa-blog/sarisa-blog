@@ -66,6 +66,17 @@ const recorteAntifragilidade = gerarRecorteVidro(1337);
         vence quem acerta mais. Vence quem continua vivo.
       </p>
 
+      <figure class="secao-imagem">
+        <video
+          src="/videos/falange-macedonica.mp4"
+          poster="/images/falange-macedonica-poster.jpg"
+          autoplay
+          muted
+          loop
+          playsinline
+        />
+      </figure>
+
       <h2>Estrutura acima de narrativa</h2>
       <p>
         Este é o princípio que organiza todos os outros. A Sarisa não constrói
@@ -134,7 +145,7 @@ const recorteAntifragilidade = gerarRecorteVidro(1337);
 
       <h2>Antifragilidade</h2>
 
-      <figure class="secao-imagem">
+      <figure class="secao-imagem vidro">
         <img
           src="/images/filosofia-antifragilidade.jpg"
           alt="Cacos de vidro estilhaçado sobre fundo preto"
@@ -210,10 +221,17 @@ const recorteAntifragilidade = gerarRecorteVidro(1337);
     .secao-imagem {
       margin: 1.75rem 0;
     }
-    .secao-imagem img {
+    .secao-imagem img,
+    .secao-imagem video {
       width: 100%;
       height: auto;
       display: block;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .secao-imagem.vidro img {
+      border: none;
+      border-radius: 0;
       -webkit-mask-image: radial-gradient(ellipse 62% 68% at 50% 50%, #000 45%, transparent 88%);
       mask-image: radial-gradient(ellipse 62% 68% at 50% 50%, #000 45%, transparent 88%);
     }
