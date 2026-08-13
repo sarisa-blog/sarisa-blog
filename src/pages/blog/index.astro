@@ -7,7 +7,7 @@ const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Blog" description="Todos os posts da Sarisa — macro, derivativos, cases e engenharia de portfólio.">
+<BaseLayout title="Blog" description="Todos os posts da Sarisa: macro, derivativos, cases e engenharia de portfólio.">
   <div class="container">
     <p class="kicker">Sarisa</p>
     <h1>Blog</h1>

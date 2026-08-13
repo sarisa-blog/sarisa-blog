@@ -14,7 +14,7 @@ interface Props {
 
 const { title, description, ogImage, article } = Astro.props;
 const siteName = 'Sarisa';
-const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+const fullTitle = title === siteName ? title : `${title} - ${siteName}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = ogImage ? new URL(ogImage, Astro.site) : new URL('/og-default.png', Astro.site);
 ---
@@ -76,7 +76,7 @@ const imageURL = ogImage ? new URL(ogImage, Astro.site) : new URL('/og-default.p
     <footer class="site-footer">
       <div class="container-wide">
         <p class="disclaimer">
-          Sarisa — conteúdo informativo e educacional, não constitui recomendação de investimento.
+          Sarisa. Conteúdo informativo e educacional, não constitui recomendação de investimento.
           Operações com opções e derivativos envolvem risco, inclusive de perda superior ao capital
           alocado. Rentabilidade passada não garante resultados futuros.
         </p>
