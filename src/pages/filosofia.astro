@@ -102,6 +102,16 @@ import HierarquiaEstrutural from '../components/HierarquiaEstrutural.astro';
       </p>
 
       <h2>Antifragilidade</h2>
+
+      <figure class="secao-imagem">
+        <img
+          src="/images/filosofia-antifragilidade.jpg"
+          alt="Cacos de vidro estilhaçado sobre fundo preto"
+          loading="lazy"
+        />
+        <figcaption>Foto: cottonbro studio / Pexels</figcaption>
+      </figure>
+
       <p>
         Uma estrutura frágil quebra sob pressão. Uma estrutura robusta resiste.
         Uma estrutura antifrágil aprende, se adapta e amplia vantagem durante
@@ -165,6 +175,22 @@ import HierarquiaEstrutural from '../components/HierarquiaEstrutural.astro';
     .lede {
       font-size: 1.15rem;
       color: var(--text-body);
+    }
+    .secao-imagem {
+      margin: 1.75rem 0;
+    }
+    .secao-imagem img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .secao-imagem figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
     }
     .closing {
       margin-top: 2.5rem;
