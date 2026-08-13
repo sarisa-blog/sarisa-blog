@@ -1,0 +1,194 @@
+---
+// Cone invertido da hierarquia estrutural da Sarisa: Sobrevivência no
+// topo largo (maior peso), afunilando até Retorno na ponta (menor
+// prioridade quando há conflito). Rótulos pequenos e refinados do lado
+// de fora, ligados por linha fina (estilo callout/leader line).
+// Hover acende a faixa + linha + rótulo juntos, via CSS.
+
+const NIVEIS = [
+  "Sobrevivência",
+  "Liquidez",
+  "Controle de risco",
+  "Hedge",
+  "Estrutura",
+  "Assimetria",
+  "Convexidade",
+  "Retorno",
+]; // ordem de prioridade: 1 = topo largo (mais peso), 8 = ponta (menos peso)
+
+const N = NIVEIS.length;
+const W = 1150;
+const H = 980;
+const TOP_Y = 150;
+const BOT_Y = 900;
+const HEIGHT = BOT_Y - TOP_Y;
+const HALF_TOP = 230;
+const CX = 380;
+const LABEL_X = 700;
+
+function blend(fg: number[], bg: number[], alpha: number) {
+  return fg.map((c, i) => Math.round(bg[i] + (c - bg[i]) * alpha));
+}
+function darken(rgb: number[], f: number) {
+  return rgb.map((c) => Math.round(c * f));
+}
+function toHex([r, g, b]: number[]) {
+  return `#${[r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("")}`;
+}
+
+const GOLD = [191, 174, 130];
+const BG_RGB = [11, 11, 11];
+
+const linhas = Array.from({ length: N }, (_, i) => {
+  const yTop = TOP_Y + (i / N) * HEIGHT;
+  const yBot = TOP_Y + ((i + 1) / N) * HEIGHT;
+  const yMid = (yTop + yBot) / 2;
+  const hwTop = HALF_TOP * (1 - i / N);
+  const hwBot = HALF_TOP * (1 - (i + 1) / N);
+  const hwMid = (hwTop + hwBot) / 2;
+  const numero = i + 1;
+  const label = NIVEIS[i];
+  const opacity = 1 - (i / (N - 1)) * 0.68;
+
+  const corBase = blend(GOLD, BG_RGB, opacity);
+  const corBorda = darken(corBase, 0.76);
+  const gradId = `grad-${numero}`;
+
+  const pontos = [
+    [CX - hwTop, yTop],
+    [CX + hwTop, yTop],
+    [CX + hwBot, yBot],
+    [CX - hwBot, yBot],
+  ]
+    .map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`)
+    .join(" ");
+
+  const edgeX = CX + hwMid;
+  const elbowX = LABEL_X - 26;
+
+  return {
+    numero,
+    label,
+    gradId,
+    corBase: toHex(corBase),
+    corBorda: toHex(corBorda),
+    pontos,
+    yMid,
+    edgeX,
+    elbowX,
+  };
+});
+---
+
+<div class="hierarquia-wrap">
+  <p class="hierarquia-kicker">Hierarquia estrutural</p>
+  <svg
+    viewBox={`0 0 ${W} ${H}`}
+    class="hierarquia-svg"
+    role="img"
+    aria-label="Diagrama da hierarquia estrutural da Sarisa, do topo (Sobrevivência, maior peso) à ponta (Retorno, menor prioridade)"
+  >
+    <defs>
+      {linhas.map((l) => (
+        <linearGradient id={l.gradId} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color={l.corBorda} />
+          <stop offset="50%" stop-color={l.corBase} />
+          <stop offset="100%" stop-color={l.corBorda} />
+        </linearGradient>
+      ))}
+    </defs>
+
+    {linhas.map((l) => (
+      <g class="camada">
+        <polygon points={l.pontos} fill={`url(#${l.gradId})`} />
+        <line
+          x1={l.edgeX} y1={l.yMid}
+          x2={l.elbowX} y2={l.yMid}
+          class="leader"
+        />
+        <circle cx={l.edgeX} cy={l.yMid} r="3" class="dot" />
+        <text x={LABEL_X} y={l.yMid - 9} class="numero">
+          {String(l.numero).padStart(2, "0")}
+        </text>
+        <text x={LABEL_X} y={l.yMid + 15} class="rotulo">
+          {l.label}
+        </text>
+      </g>
+    ))}
+  </svg>
+  <p class="hierarquia-rodape">Do mais crítico ao menos prioritário quando há conflito.</p>
+</div>
+
+<style>
+  .hierarquia-wrap {
+    margin: 2.5rem 0;
+    padding: 2rem 1.5rem 1.5rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .hierarquia-kicker {
+    color: var(--gold-dim);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+  .hierarquia-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .camada {
+    cursor: default;
+  }
+  .camada polygon {
+    transition: filter 0.25s ease;
+  }
+  .camada:hover polygon {
+    filter: brightness(1.3) drop-shadow(0 0 18px rgba(191, 174, 130, 0.65));
+  }
+  .leader {
+    stroke: #5a523e;
+    stroke-width: 1;
+    transition: stroke 0.25s ease;
+  }
+  .dot {
+    fill: var(--gold);
+    transition: filter 0.25s ease;
+  }
+  .camada:hover .leader {
+    stroke: var(--gold);
+  }
+  .camada:hover .dot {
+    filter: drop-shadow(0 0 6px rgba(191, 174, 130, 0.9));
+  }
+  .numero {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    fill: var(--gold-dim);
+    transition: fill 0.25s ease;
+    pointer-events: none;
+  }
+  .rotulo {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 600;
+    fill: #e1e1e1;
+    transition: fill 0.25s ease;
+    pointer-events: none;
+  }
+  .camada:hover .numero {
+    fill: var(--gold);
+  }
+  .camada:hover .rotulo {
+    fill: #fff;
+  }
+  .hierarquia-rodape {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 1rem 0 0;
+    text-align: center;
+  }
+</style>
