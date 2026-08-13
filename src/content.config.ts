@@ -13,9 +13,10 @@ const blog = defineCollection({
     categoria: z.enum([
       'derivativos',
       'macro',
-      'renda-e-carregamento',
+      'cripto',
+      'exterior',
       'cases',
-      'filosofia',
+      'cases-exterior',
     ]),
     tags: z.array(z.string()).default([]),
     // imagem de capa (reaproveitar o pipeline de ilustracao ja usado nos carrosseis/reels)

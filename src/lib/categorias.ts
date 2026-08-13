@@ -1,9 +1,10 @@
 export const CATEGORIAS = {
   derivativos: 'Derivativos',
   macro: 'Macro',
-  'renda-e-carregamento': 'Renda e Carregamento',
-  cases: 'Cases',
-  filosofia: 'Filosofia',
+  cripto: 'Cripto',
+  exterior: 'Exterior',
+  cases: 'Cases Brasil',
+  'cases-exterior': 'Cases Exterior',
 } as const;
 
 export type CategoriaSlug = keyof typeof CATEGORIAS;
