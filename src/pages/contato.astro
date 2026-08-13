@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: confirmar se essa é a caixa de e-mail real criada na GoDaddy —
+// trocar aqui se o endereço definitivo for outro.
+const EMAIL = 'contato@sarisa.com.br';
+---
+
+<BaseLayout
+  title="Contato"
+  description="Fale com a Sarisa sobre macro, derivativos ou engenharia de portfólio."
+>
+  <div class="container">
+    <p class="kicker">Sarisa</p>
+    <h1>Vamos conversar.</h1>
+    <p class="lede">
+      Se um post aqui levantou uma pergunta específica sobre sua carteira, ou você
+      quer entender se uma estrutura como as que a gente publica faz sentido pro
+      seu caso, é só chamar.
+    </p>
+
+    <div class="contact-card">
+      <p class="contact-label">E-mail</p>
+      <a class="contact-value" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </div>
+
+    <div class="contact-card">
+      <p class="contact-label">Instagram</p>
+      <a class="contact-value" href="https://instagram.com/sarisa.advisory" target="_blank" rel="noopener">
+        @sarisa.advisory
+      </a>
+    </div>
+
+    <p class="disclaimer-note">
+      Este canal é pra conversa inicial e dúvidas gerais — nenhuma resposta por
+      e-mail ou rede social deve ser interpretada como recomendação de
+      investimento antes de uma avaliação individual da sua situação.
+    </p>
+  </div>
+
+  <style>
+    .container {
+      padding: 3rem 0 4rem;
+      max-width: var(--content-w);
+    }
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin: 0.5rem 0 1rem;
+    }
+    .lede {
+      font-size: 1.1rem;
+      color: var(--text-body);
+      max-width: 34rem;
+      margin-bottom: 2.5rem;
+    }
+    .contact-card {
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .contact-label {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.35rem;
+    }
+    .contact-value {
+      color: var(--gold);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .disclaimer-note {
+      margin-top: 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</BaseLayout>

@@ -40,6 +40,27 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
     </ul>
   </section>
 
+  <section class="about-teaser">
+    <div class="container about-inner">
+      <div>
+        <p class="kicker">Sobre a Sarisa</p>
+        <p class="about-text">
+          Conteúdo técnico denso não busca alcance fácil — busca quem já opera e
+          quer entender a mecânica real por trás da estrutura, não só o resultado
+          prometido.
+        </p>
+      </div>
+      <a class="about-link" href="/sobre">Conhecer a Sarisa →</a>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="container cta-final-inner">
+      <p class="cta-final-title">Quer conversar sobre uma estrutura específica?</p>
+      <a class="cta-final-link" href="/contato">Fala com a Sarisa →</a>
+    </div>
+  </section>
+
   <style>
     .hero {
       padding: 5rem 0 3rem;
@@ -102,6 +123,49 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
     }
     .empty {
       color: var(--text-muted);
+    }
+
+    .about-teaser {
+      border-top: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+    .about-inner {
+      padding: 3rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .about-text {
+      max-width: 32rem;
+      font-size: 1.05rem;
+      color: var(--text-body);
+      margin: 0.5rem 0 0;
+    }
+    .about-link {
+      color: var(--gold);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .cta-final {
+      border-top: 1px solid var(--border);
+    }
+    .cta-final-inner {
+      padding: 3rem 0 4rem;
+      text-align: center;
+    }
+    .cta-final-title {
+      font-size: 1.3rem;
+      color: #fff;
+      font-weight: 700;
+      margin: 0 0 1rem;
+    }
+    .cta-final-link {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.1rem;
     }
   </style>
 </BaseLayout>

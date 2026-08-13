@@ -1,25 +1,23 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { CATEGORIAS } from '../../../lib/categorias';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: { post },
+    props: { post, allPosts: posts },
   }));
 }
 
-const { post } = Astro.props;
+const { post, allPosts } = Astro.props;
 const { Content } = await render(post);
 
-const categorias = {
-  derivativos: 'Derivativos',
-  macro: 'Macro',
-  'renda-e-carregamento': 'Renda e Carregamento',
-  cases: 'Cases',
-  filosofia: 'Filosofia',
-};
+const relacionados = allPosts
+  .filter((p) => p.id !== post.id && p.data.categoria === post.data.categoria)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -47,7 +45,7 @@ const jsonLd = {
 
   <article class="container post">
     <p class="kicker">
-      <span class="badge">{categorias[post.data.categoria]}</span>
+      <a class="badge" href={`/blog/categoria/${post.data.categoria}/`}>{CATEGORIAS[post.data.categoria]}</a>
     </p>
     <h1>{post.data.title}</h1>
     <p class="post-meta">
@@ -79,11 +77,35 @@ const jsonLd = {
       Operações com opções e derivativos envolvem risco, inclusive de perda superior ao
       capital alocado.
     </p>
+
+    <div class="author-block">
+      <p class="author-name">Sarisa</p>
+      <p class="author-bio">
+        Macro, derivativos e engenharia de portfólio com o rigor de quem precifica,
+        não de quem convence. <a href="/sobre">Sobre a Sarisa →</a>
+      </p>
+    </div>
   </article>
+
+  {relacionados.length > 0 && (
+    <div class="container related-wrap">
+      <h2>Continue lendo</h2>
+      <ul class="related-list">
+        {relacionados.map((r) => (
+          <li>
+            <a href={`/blog/${r.id}/`}>
+              <span class="related-title">{r.data.title}</span>
+              <span class="related-desc">{r.data.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
 
   <style>
     .post {
-      padding: 3rem 0 4rem;
+      padding: 3rem 0 2.5rem;
     }
     h1 {
       font-size: clamp(1.75rem, 4vw, 2.5rem);
@@ -131,6 +153,66 @@ const jsonLd = {
     }
     .disclaimer {
       margin-top: 2rem;
+    }
+    .author-block {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .author-name {
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .author-bio {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .related-wrap {
+      padding: 0 0 4rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2.5rem;
+    }
+    .related-wrap h2 {
+      font-size: 1.1rem;
+      margin: 0 0 1rem;
+    }
+    .related-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.25rem;
+    }
+    .related-list a {
+      display: block;
+      padding: 1rem 0;
+      color: inherit;
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .related-list a:hover {
+      text-decoration: none;
+    }
+    .related-list a:hover .related-title {
+      color: var(--gold);
+    }
+    .related-title {
+      display: block;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .related-desc {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-top: 0.2rem;
     }
   </style>
 </BaseLayout>

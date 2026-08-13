@@ -134,6 +134,11 @@ hr {
   color: var(--gold);
   font-size: 0.75rem;
   font-weight: 600;
+  text-decoration: none;
+}
+a.badge:hover {
+  text-decoration: none;
+  border-color: var(--gold);
 }
 
 .disclaimer {

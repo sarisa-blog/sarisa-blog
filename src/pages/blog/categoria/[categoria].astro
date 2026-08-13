@@ -1,21 +1,39 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIAS, CATEGORIA_SLUGS } from '../../lib/categorias';
+import { CATEGORIAS, CATEGORIA_SLUGS } from '../../../lib/categorias';
 
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+  return CATEGORIA_SLUGS.map((categoria) => ({
+    params: { categoria },
+    props: {
+      posts: allPosts
+        .filter((p) => p.data.categoria === categoria)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { categoria } = Astro.params;
+const { posts } = Astro.props;
+const label = CATEGORIAS[categoria as keyof typeof CATEGORIAS];
 ---
 
-<BaseLayout title="Blog" description="Todos os posts da Sarisa — macro, derivativos, cases e engenharia de portfólio.">
+<BaseLayout
+  title={`Blog — ${label}`}
+  description={`Posts da Sarisa na categoria ${label}.`}
+>
   <div class="container">
-    <p class="kicker">Sarisa</p>
-    <h1>Blog</h1>
+    <p class="kicker">Sarisa / Blog</p>
+    <h1>{label}</h1>
 
     <div class="cat-nav">
-      <a href="/blog" class="active">Todos</a>
+      <a href="/blog">Todos</a>
       {CATEGORIA_SLUGS.map((slug) => (
-        <a href={`/blog/categoria/${slug}/`}>{CATEGORIAS[slug]}</a>
+        <a href={`/blog/categoria/${slug}/`} class={slug === categoria ? 'active' : ''}>
+          {CATEGORIAS[slug]}
+        </a>
       ))}
     </div>
 
@@ -23,18 +41,15 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
       {posts.map((post) => (
         <li>
           <a href={`/blog/${post.id}/`}>
-            <span class="post-meta">
-              <span class="badge">{CATEGORIAS[post.data.categoria]}</span>
-              <span class="post-date">
-                {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' })}
-              </span>
+            <span class="post-date">
+              {post.data.pubDate.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' })}
             </span>
             <span class="post-title">{post.data.title}</span>
             <span class="post-desc">{post.data.description}</span>
           </a>
         </li>
       ))}
-      {posts.length === 0 && <p class="empty">Nenhum post publicado ainda.</p>}
+      {posts.length === 0 && <p class="empty">Nenhum post nessa categoria ainda.</p>}
     </ul>
   </div>
 
@@ -89,27 +104,23 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
     .post-list a:hover .post-title {
       color: var(--gold);
     }
-    .post-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
     .post-date {
+      display: block;
       color: var(--text-muted);
       font-size: 0.8rem;
+      margin-bottom: 0.25rem;
     }
     .post-title {
       display: block;
       color: #fff;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
     }
     .post-desc {
       display: block;
       color: var(--text-muted);
       font-size: 0.92rem;
-      margin-top: 0.35rem;
+      margin-top: 0.25rem;
     }
     .empty {
       color: var(--text-muted);
