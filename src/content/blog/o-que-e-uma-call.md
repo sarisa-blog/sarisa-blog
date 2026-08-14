@@ -61,15 +61,18 @@ mesmo. É simplesmente máximo entre (preço do ativo menos strike) e zero. Não
 depende de tempo, nem de volatilidade, só de onde o preço está agora em
 relação ao strike.
 
-**Valor tempo**: tudo o que sobra do prêmio além do valor intrínseco. É o
-que o mercado cobra pela possibilidade de o ativo se mover a seu favor antes
-do vencimento. Esse componente é maior quanto mais tempo falta e quanto
-maior a volatilidade esperada, e ele **evapora todo dia**, de forma
-acelerada nas últimas semanas antes do vencimento (o efeito conhecido como
-*theta*).
+**Valor extrínseco** (o apelido comum no mercado é "valor tempo", mas o termo
+tecnicamente correto é esse): tudo o que sobra do prêmio além do valor
+intrínseco. É o que o mercado cobra pela possibilidade de o ativo se mover a
+seu favor antes do vencimento. Esse componente é maior quanto mais tempo
+falta e quanto maior a volatilidade esperada, isto é, depende dos dois, não
+só do tempo, e ele **evapora até o vencimento**, de forma acelerada nas
+últimas semanas (o efeito conhecido como *theta*). Chamar esse componente só
+de "valor tempo" pega metade da história, já que volatilidade também entra
+na conta.
 
 <figure class="post-img">
-  <img src="/images/call-valor-tempo.png" alt="Gráfico comparando o valor de uma call antes do vencimento (curva suave, com valor tempo) contra o valor no vencimento (linha quebrada, só valor intrínseco)" loading="lazy" />
+  <img src="/images/call-valor-tempo.png" alt="Gráfico comparando o valor de uma call antes do vencimento (curva suave, com valor extrínseco) contra o valor no vencimento (linha quebrada, só valor intrínseco)" loading="lazy" />
 </figure>
 
 No gráfico acima, a linha pontilhada é o que a call vale exatamente no
@@ -77,7 +80,7 @@ vencimento (só o intrínseco, a mesma linha quebrada de antes). A curva
 dourada é o que ela vale **hoje**, com 45 dias úteis ainda pela frente: por
 mais que o ativo esteja abaixo do strike, a call ainda vale alguma coisa,
 porque ainda há tempo pra virar. Essa área entre as duas linhas é o valor
-tempo. Ela é máxima perto do strike (onde a incerteza sobre exercer ou não é
+extrínseco (o "valor tempo" de que falamos acima). Ela é máxima perto do strike (onde a incerteza sobre exercer ou não é
 maior) e vai a zero nas pontas, tanto muito abaixo quanto muito acima do
 strike, onde o resultado já está praticamente decidido.
 
@@ -86,13 +89,13 @@ strike, onde o resultado já está praticamente decidido.
 Quem compra uma call comprando "porque acha que vai subir" está, sem saber,
 fazendo duas apostas ao mesmo tempo: uma na direção do ativo, outra em quanto
 tempo isso leva pra acontecer. Se acertar a direção mas o movimento demorar
-mais do que o vencimento da opção, o valor tempo evapora antes do valor
+mais do que o vencimento da opção, o valor extrínseco evapora antes do valor
 intrínseco aparecer, e a call pode expirar sem valor mesmo com a tese
 "certa".
 
 É por isso que, na Sarisa, call comprada isolada quase nunca é o produto
 final. Ela entra como componente dentro de uma estrutura (trava, collar,
-acúmulo com meta de preço), onde o custo do valor tempo é medido contra um
+acúmulo com meta de preço), onde o custo do valor extrínseco é medido contra um
 objetivo específico e um horizonte definido, não contra uma esperança de
 alta. O princípio é o mesmo da nossa [página de filosofia](/filosofia):
 estrutura acima de narrativa. "Vai subir" não é uma estrutura. Strike,
