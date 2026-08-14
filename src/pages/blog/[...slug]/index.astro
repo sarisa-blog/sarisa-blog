@@ -145,6 +145,17 @@ const jsonLd = {
     .prose :global(li) {
       margin: 0.4rem 0;
     }
+    .prose :global(figure.post-img) {
+      margin: 2rem 0;
+    }
+    .prose :global(figure.post-img img) {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
     .tags {
       display: flex;
       gap: 0.5rem;
