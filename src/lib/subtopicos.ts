@@ -14,5 +14,6 @@ export const SUBTOPICOS: Partial<Record<CategoriaSlug, Subtopico[]>> = {
     { slug: 'opcoes', label: 'Opções' },
     { slug: 'precificacao', label: 'Precificação e suas variáveis' },
     { slug: 'gregas', label: 'Gregas' },
+    { slug: 'gregas-casos-reais', label: 'Exemplo real de ganho de $ com a teoria das gregas' },
   ],
 };
