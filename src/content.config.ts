@@ -19,6 +19,10 @@ const blog = defineCollection({
       'cases-exterior',
     ]),
     tags: z.array(z.string()).default([]),
+    // subtópico dentro da categoria (o "retângulo" na página da categoria,
+    // ex: derivativos -> "opcoes"). Ver src/lib/subtopicos.ts. Opcional:
+    // categoria sem subtópicos definidos cai na lista simples de sempre.
+    subtopico: z.string().optional(),
     // imagem de capa (reaproveitar o pipeline de ilustracao ja usado nos carrosseis/reels)
     heroImage: z.string().optional(),
     // marca posts com numero ilustrativo/exemplo — mesma logica dos PDFs de cliente
