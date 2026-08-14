@@ -1,6 +1,6 @@
 ---
 title: "O que é uma call: o direito de comprar, não a obrigação"
-description: "Uma call dá o direito de comprar um ativo por um preço fixo até uma data, nunca a obrigação. Isso muda tudo: quanto você pode perder é limitado, quanto você paga tem dois componentes distintos, e um deles evapora todo dia."
+description: "Uma call dá o direito de comprar um ativo por um preço fixo até uma data. Mas todo direito tem uma contraparte: quem vende assume a obrigação oposta. Payoff, prêmio (intrínseco + extrínseco) e os dois lados do mesmo contrato."
 pubDate: 2026-08-14
 categoria: "derivativos"
 subtopico: "opcoes"
@@ -29,6 +29,12 @@ futuro: lá, se o preço despenca, a perda te acompanha sem limite (ou até a
 zero). Numa call comprada, a perda máxima é conhecida no instante em que você
 paga o prêmio.
 
+Mas repara: todo direito precisa de uma contraparte que assume a obrigação
+oposta. Quem vende a call, o **lançador**, recebe o prêmio à vista agora, mas
+em troca fica obrigado a vender o ativo pelo strike se o comprador decidir
+exercer, não importa o quanto o preço tenha subido. Direito e obrigação são
+as duas metades do mesmo contrato, nunca existe uma sem a outra.
+
 ## O payoff no vencimento
 
 No dia do vencimento, o resultado de uma call comprada segue uma fórmula
@@ -50,6 +56,34 @@ operação.
 Essa assimetria (perda limitada e conhecida, ganho ilimitado) é o motivo pelo
 qual call vira ferramenta de estrutura, não só de especulação direta. Mas
 ela tem um preço, e esse preço não é só sobre "quanto o ativo vale hoje".
+
+## O outro lado do contrato: vender é obrigação, não direito
+
+Tudo o que foi descrito até aqui vale pra quem **compra** a call. Quem
+**vende** (lança) está do lado espelhado, e a diferença não é sutil: onde o
+comprador tem direito, o vendedor tem obrigação, e onde o comprador tem risco
+limitado, o vendedor tem risco (em teoria) ilimitado.
+
+<figure class="post-img">
+  <img src="/images/call-comprada-vendida.png" alt="Gráfico comparando o payoff de uma call comprada (ganho ilimitado, perda limitada ao prêmio) com o de uma call vendida (ganho limitado ao prêmio, perda ilimitada), mesmo strike e prêmio" loading="lazy" />
+</figure>
+
+O gráfico mostra os dois lados do mesmo contrato, com o mesmo strike e o
+mesmo prêmio. O vendedor recebe R$ 5 à vista no momento em que lança a
+opção. Se o ativo ficar abaixo de R$ 100 no vencimento, o comprador não
+exerce, e o vendedor fica com o prêmio inteiro, esse é o melhor cenário
+possível pra quem vendeu. Mas se o ativo subir bastante, o vendedor é
+obrigado a entregar o ativo pelo strike, comprando-o no mercado (ou usando
+um que já tinha) por um preço muito maior. O ganho do vendedor está travado
+em R$ 5, não importa o quanto o ativo caia; a perda dele cresce junto com o
+ativo, sem teto.
+
+Essa é a razão pela qual vender call a descoberto (sem já ter o ativo em
+carteira) é considerado uma das operações de maior risco em opções, e por
+que, quando a Sarisa vende call, é quase sempre sobre um ativo que já está
+em carteira (a chamada *covered call*), transformando a obrigação numa forma
+de gerar renda sobre algo que você já ia segurar de qualquer forma, não numa
+aposta contra alta ilimitada.
 
 ## Prêmio não é um número só: são dois
 

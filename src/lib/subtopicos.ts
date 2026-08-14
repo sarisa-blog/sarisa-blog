@@ -12,6 +12,7 @@ export interface Subtopico {
 export const SUBTOPICOS: Partial<Record<CategoriaSlug, Subtopico[]>> = {
   derivativos: [
     { slug: 'opcoes', label: 'Opções' },
-    { slug: 'opcoes-na-pratica', label: 'Opções na prática' },
+    { slug: 'precificacao', label: 'Precificação e suas variáveis' },
+    { slug: 'gregas', label: 'Gregas' },
   ],
 };
