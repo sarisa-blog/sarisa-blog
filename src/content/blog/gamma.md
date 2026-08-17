@@ -1,7 +1,7 @@
 ---
 title: "Gamma: a aceleração do delta, e por que ela assusta perto do vencimento"
 description: "Gamma mede quanto o delta muda sozinho. É pequena a maior parte do tempo e explosiva perto do vencimento, exatamente perto do strike, o que torna vender opção perto do vencimento uma aposta bem diferente de vender opção longa."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T11:30:00Z
 categoria: "derivativos"
 subtopico: "gregas"
 tags: ["gamma", "gregas", "opções", "convexidade", "derivativos", "educacional"]

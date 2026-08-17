@@ -1,7 +1,7 @@
 ---
 title: "Quais opções são mais líquidas no Brasil"
 description: "Liquidez de opções não é a mesma coisa que liquidez da ação. No Brasil ela é mais concentrada ainda: dois ou três nomes respondem pela imensa maioria do volume, e isso muda como você deve montar qualquer estrutura fora deles."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T09:30:00Z
 categoria: "derivativos"
 subtopico: "opcoes"
 tags: ["opções", "liquidez", "b3", "petr4", "vale3", "derivativos"]

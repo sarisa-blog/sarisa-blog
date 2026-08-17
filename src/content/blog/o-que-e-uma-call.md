@@ -1,7 +1,7 @@
 ---
 title: "O que é uma call: o direito de comprar, não a obrigação"
 description: "Uma call dá o direito de comprar um ativo por um preço fixo até uma data. Mas todo direito tem uma contraparte: quem vende assume a obrigação oposta. Payoff, prêmio (intrínseco + extrínseco) e os dois lados do mesmo contrato."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T08:00:00Z
 categoria: "derivativos"
 subtopico: "opcoes"
 tags: ["opções", "call", "derivativos", "black-scholes", "educacional"]

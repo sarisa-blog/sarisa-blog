@@ -1,7 +1,7 @@
 ---
 title: "O modelo de Black-Scholes: o que ele calcula, e o que ele assume"
 description: "Black-Scholes não descobre o preço certo de uma opção. Ele calcula o preço consistente com cinco números que você fornece. Errar um input errado a resposta inteira, e um deles nem é observável no mercado."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T10:00:00Z
 categoria: "derivativos"
 subtopico: "precificacao"
 tags: ["black-scholes", "opções", "derivativos", "precificação", "educacional"]

@@ -1,7 +1,7 @@
 ---
 title: "Volmageddon: o dia em que quem entendia vega e gamma ganhou uma fortuna"
 description: "Em 5 de fevereiro de 2018, o VIX subiu 115% num pregão só e um produto de US$ 1,9 bi virou pó em horas. O mecanismo por trás já tinha sido descrito, em detalhe, um ano antes, por quem entendia a matemática de vega e gamma dos produtos de volatilidade curta."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T14:00:00Z
 categoria: "derivativos"
 subtopico: "gregas-casos-reais"
 tags: ["volmageddon", "vega", "gamma", "vix", "gregas", "case-real", "derivativos"]

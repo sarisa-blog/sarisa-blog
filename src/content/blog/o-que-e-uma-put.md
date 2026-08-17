@@ -1,7 +1,7 @@
 ---
 title: "O que é uma put: o direito de vender, a obrigação de comprar"
 description: "Put é o espelho da call, e confunde por um motivo diferente: comprar uma put é apostar na queda com risco limitado. Vender uma put é o oposto, ganho travado no prêmio, obrigação de comprar o ativo mesmo se ele desabar."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T08:30:00Z
 categoria: "derivativos"
 subtopico: "opcoes"
 tags: ["opções", "put", "derivativos", "black-scholes", "educacional"]

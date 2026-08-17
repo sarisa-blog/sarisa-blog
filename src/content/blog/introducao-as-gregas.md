@@ -1,7 +1,7 @@
 ---
 title: "Introdução às gregas: o mapa de risco por trás do preço da opção"
 description: "O preço de uma opção é um número só, mas ele reage a cinco coisas diferentes ao mesmo tempo. As gregas separam essa reação pedaço por pedaço, e são o vocabulário real de quem gerencia risco em opções, não só precifica."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T11:00:00Z
 categoria: "derivativos"
 subtopico: "gregas"
 tags: ["gregas", "delta", "gamma", "vega", "theta", "opções", "derivativos", "educacional"]

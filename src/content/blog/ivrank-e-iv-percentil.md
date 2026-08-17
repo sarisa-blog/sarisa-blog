@@ -1,7 +1,7 @@
 ---
 title: "IVRank e IV Percentil: a volatilidade está alta comparado a quê"
 description: "Dizer que a volatilidade implícita está em 30% não diz nada sozinho. IV Rank e IV Percentil respondem 'alta comparado a quê', mas respondem de formas diferentes, e um outlier isolado pode fazer as duas discordarem."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T10:15:00Z
 categoria: "derivativos"
 subtopico: "precificacao"
 tags: ["ivrank", "iv-percentil", "volatilidade", "opções", "derivativos", "educacional"]

@@ -1,7 +1,7 @@
 ---
 title: "Vanna: quando a volatilidade muda, o delta muda junto"
 description: "Vanna mede a ligação escondida entre volatilidade e direção: quanto o delta de uma posição muda quando a volatilidade implícita se move, mesmo com o ativo parado. É a grega por trás de boa parte do fluxo mecânico do mercado de opções."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T12:15:00Z
 categoria: "derivativos"
 subtopico: "gregas"
 tags: ["vanna", "gregas", "opções", "volatilidade", "derivativos", "educacional"]

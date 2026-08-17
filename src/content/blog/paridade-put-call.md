@@ -1,7 +1,7 @@
 ---
 title: "Paridade put-call: por que call e put nunca são independentes"
 description: "Call e put sobre o mesmo ativo, mesmo strike, mesmo vencimento não são dois produtos separados, são a mesma relação matemática vista de dois ângulos. Quando essa relação quebra, existe arbitragem, e ela não dura."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T10:45:00Z
 categoria: "derivativos"
 subtopico: "precificacao"
 tags: ["paridade-put-call", "opções", "arbitragem", "derivativos", "educacional"]

@@ -1,7 +1,7 @@
 ---
 title: "Vanna, charm e o mercado de opções que vence no mesmo dia"
 description: "Diferente do GameStop e do Volmageddon, esse caso não é um evento isolado, é um mecanismo que roda todo dia no mercado americano. Opções que vencem no mesmo dia já são mais da metade do volume do S&P 500, e vanna e charm viraram fonte de estratégia sistemática."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T14:30:00Z
 categoria: "derivativos"
 subtopico: "gregas-casos-reais"
 tags: ["vanna", "charm", "0dte", "gregas", "case-real", "estrutura-de-mercado", "derivativos"]

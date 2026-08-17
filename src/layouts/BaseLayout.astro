@@ -95,28 +95,43 @@ const imageURL = ogImage ? new URL(ogImage, Astro.site) : new URL('/og-default.p
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
+        row-gap: 0.6rem;
       }
       .brand {
         display: flex;
         align-items: center;
+        flex-shrink: 0;
       }
       .brand-logo {
         height: 48px;
         width: auto;
         display: block;
+        flex-shrink: 0;
       }
       .site-nav {
         display: flex;
         gap: 1.5rem;
+        flex-wrap: wrap;
+        row-gap: 0.4rem;
       }
       .site-nav a {
         color: var(--text-body);
         font-size: 0.9rem;
         font-weight: 600;
+        white-space: nowrap;
       }
       .site-nav a:hover {
         color: var(--gold);
         text-decoration: none;
+      }
+      /* abaixo de ~480px, logo+nav não cabem numa linha só (bug encontrado:
+         o img com width:auto colapsava pra 0 dentro do flex row apertado) */
+      @media (max-width: 480px) {
+        .brand-logo { height: 34px; }
+        .site-header-inner { justify-content: center; text-align: center; }
+        .site-nav { justify-content: center; gap: 1rem 1.1rem; }
+        .site-nav a { font-size: 0.82rem; }
       }
       main {
         min-height: 60vh;

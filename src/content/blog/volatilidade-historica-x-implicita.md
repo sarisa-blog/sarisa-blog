@@ -1,7 +1,7 @@
 ---
 title: "Volatilidade histórica x volatilidade implícita: passado e expectativa"
 description: "Uma olha pra trás e mede o que já aconteceu. A outra está embutida no preço da opção agora e mede o que o mercado espera que aconteça. Confundir as duas é o erro mais comum de quem começa a precificar opção."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T10:30:00Z
 categoria: "derivativos"
 subtopico: "precificacao"
 tags: ["volatilidade", "iv", "hv", "opções", "derivativos", "educacional"]

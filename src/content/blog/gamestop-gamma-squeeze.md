@@ -1,7 +1,7 @@
 ---
 title: "GameStop: como delta e gamma transformaram $17 em $483"
 description: "Em janeiro de 2021, GameStop subiu mais de 2.700% em menos de um mês. A causa não foi só investidor de varejo comprando ação. Foi delta e gamma forçando os formadores de mercado a comprar, empurrando o preço pra cima de forma mecânica."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T14:15:00Z
 categoria: "derivativos"
 subtopico: "gregas-casos-reais"
 tags: ["gamestop", "gme", "delta", "gamma", "short-squeeze", "gregas", "case-real", "derivativos"]

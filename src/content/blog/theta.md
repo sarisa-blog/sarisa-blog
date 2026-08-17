@@ -1,7 +1,7 @@
 ---
 title: "Theta: o aluguel que toda opção comprada paga, todo dia"
 description: "Theta mede quanto a opção perde de valor só pelo tempo passar, sem o ativo se mexer nada. É o custo silencioso de carregar opção comprada, e a fonte de renda de quem vende."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T11:45:00Z
 categoria: "derivativos"
 subtopico: "gregas"
 tags: ["theta", "gregas", "opções", "decaimento", "derivativos", "educacional"]

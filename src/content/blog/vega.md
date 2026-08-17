@@ -1,7 +1,7 @@
 ---
 title: "Vega: quanto a opção vale a mais (ou a menos) por causa da volatilidade"
 description: "Vega mede o quanto o preço da opção reage a uma mudança na volatilidade implícita, e é a grega que explica por que uma opção pode perder dinheiro mesmo com o ativo parado."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T12:00:00Z
 categoria: "derivativos"
 subtopico: "gregas"
 tags: ["vega", "gregas", "volatilidade", "opções", "derivativos", "educacional"]

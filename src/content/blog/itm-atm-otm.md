@@ -1,7 +1,7 @@
 ---
 title: "ITM, ATM, OTM: onde a opção está em relação ao preço"
 description: "Três siglas que aparecem em toda tela de opções e que a maioria decora sem entender por quê importam: onde a opção está determina quanto ela custa, quanto ela se move, e qual a chance real de virar dinheiro."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T09:00:00Z
 categoria: "derivativos"
 subtopico: "opcoes"
 tags: ["opções", "itm", "atm", "otm", "derivativos", "educacional"]

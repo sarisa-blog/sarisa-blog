@@ -1,7 +1,7 @@
 ---
 title: "Charm: o delta que muda sozinho, mesmo sem o ativo se mexer"
 description: "Charm é a grega de segunda ordem menos citada e mais subestimada: mede quanto o delta de uma posição muda de um dia pro outro só pela passagem do tempo, forçando ajuste de hedge que ninguém decidiu fazer."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T12:30:00Z
 categoria: "derivativos"
 subtopico: "gregas"
 tags: ["charm", "gregas", "opções", "hedge", "derivativos", "educacional"]

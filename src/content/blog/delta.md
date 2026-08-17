@@ -1,7 +1,7 @@
 ---
 title: "Delta: quanto a opção anda pra cada R$ 1 do ativo"
 description: "Delta é a grega mais citada e a mais mal-entendida: não é só 'quanto a opção se move', é também a base de todo hedge, e uma aproximação (imperfeita) da chance de a opção terminar valendo alguma coisa."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T11:15:00Z
 categoria: "derivativos"
 subtopico: "gregas"
 tags: ["delta", "gregas", "opções", "hedge", "derivativos", "educacional"]

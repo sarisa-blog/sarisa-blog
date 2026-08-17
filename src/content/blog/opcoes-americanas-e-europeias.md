@@ -1,7 +1,7 @@
 ---
 title: "Opções americanas e europeias: quando o direito pode ser exercido"
 description: "Não tem nada a ver com o continente. É sobre quando você pode exercer o direito: a qualquer momento até o vencimento, ou só no dia exato. No Brasil, a regra muda dependendo do que você está negociando."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T09:15:00Z
 categoria: "derivativos"
 subtopico: "opcoes"
 tags: ["opções", "americana", "europeia", "b3", "derivativos", "educacional"]

@@ -1,7 +1,7 @@
 ---
 title: "ITUB4 e o lema de Itô: uma tese que fecha no modelo e esbarra na liquidez zero"
 description: "Depois de descartar gamma, vanna e charm como causa da queda dos bancos em agosto de 2026, testamos uma tese diferente com dado real do mercado de opções do Itaú: usar o lema de Itô pra separar fluxo de fundamento. A estrutura a termo confirma. A liquidez, quase nunca."
-pubDate: 2026-08-14
+pubDate: 2026-08-14T15:00:00Z
 categoria: "derivativos"
 subtopico: "gregas-casos-reais"
 tags: ["ito", "convexidade", "itub4", "estrutura-a-termo", "liquidez", "black-scholes", "gregas", "case-real", "derivativos"]
