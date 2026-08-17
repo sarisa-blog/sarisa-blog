@@ -16,7 +16,7 @@ const countPorCategoria = Object.fromEntries(
 // Não inventar número aqui (patrimônio, anos, clientes) — placeholder até
 // ter dado real pra colocar, mesma regra do resto do site.
 const STATS = [
-  { label: 'Patrimônio sob assessoria', value: '—' },
+  { label: 'Patrimônio sob consultoria', value: '—' },
   { label: 'Anos de atuação', value: '—' },
   { label: 'Estruturas desenhadas', value: '—' },
   { label: 'Análises técnicas publicadas', value: '—' },
@@ -36,7 +36,6 @@ const STATS = [
         Macro, derivativos e engenharia de portfólio com o rigor de quem precifica,
         não de quem convence. Sem simplificar pra buscar alcance.
       </p>
-      <a class="cta" href="/blog">Ler o blog →</a>
     </div>
   </section>
 
@@ -115,12 +114,18 @@ const STATS = [
        already-dark ou tratável, mesmo padrão B&W/escurecido dos carrosséis). */
     .hero {
       position: relative;
-      padding: 6rem 0 4.5rem;
+      min-height: 82vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 4rem 0 4.5rem;
       border-bottom: 1px solid var(--border);
-      background-image: linear-gradient(180deg, rgba(11,11,11,0.55) 0%, rgba(11,11,11,0.88) 100%), url('/images/hero-home.jpg');
+      background-image: linear-gradient(180deg, rgba(11,11,11,0.35) 0%, rgba(11,11,11,0.92) 100%), url('/images/hero-home.jpg');
       background-size: cover;
       background-position: center;
       background-color: var(--bg);
+    }
+    @media (max-width: 640px) {
+      .hero { min-height: 60vh; }
     }
     .hero-overlay {
       position: absolute;
