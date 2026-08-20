@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { CATEGORIAS, CATEGORIA_SLUGS } from '../lib/categorias';
+import HierarquiaEstrutural from '../components/HierarquiaEstrutural.astro';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 5);
@@ -12,27 +13,27 @@ const countPorCategoria = Object.fromEntries(
   CATEGORIA_SLUGS.map((slug) => [slug, allPosts.filter((p) => p.data.categoria === slug).length])
 );
 
-// Banda de números: esqueleto com "-" até o usuário mandar os valores reais.
-// Não inventar número aqui (patrimônio, anos, clientes) — placeholder até
-// ter dado real pra colocar, mesma regra do resto do site.
+// Banda de números — valores reais confirmados pelo usuário em 19/ago/2026.
+// "Anos de atuação" tirado por enquanto (a preencher depois).
 const STATS = [
-  { label: 'Patrimônio sob consultoria', value: '—' },
-  { label: 'Anos de atuação', value: '—' },
-  { label: 'Estruturas desenhadas', value: '—' },
-  { label: 'Análises técnicas publicadas', value: '—' },
+  { label: 'Patrimônio sob consultoria', value: 'R$49M+' },
+  { label: 'Estruturas desenhadas', value: '1.078' },
 ];
 ---
 
 <BaseLayout
   title="Sarisa"
   description="Estrutura acima de narrativa. Análise técnica de macro, derivativos e engenharia de portfólio para quem já entende o básico."
+  transparentHeader
 >
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="container-wide hero-inner">
-      <p class="kicker">Sarisa</p>
-      <h1>Estrutura acima de narrativa.</h1>
-      <p class="lede">
+      <p class="kicker hero-anim hero-anim-1">Sarisa</p>
+      <p class="hero-phrase hero-anim hero-anim-2">Não fazemos call de mercado. Fazemos matemática de risco.</p>
+      <h1 class="hero-anim hero-anim-3">Estrutura acima de narrativa.</h1>
+      <div class="hero-rule hero-anim hero-anim-4"></div>
+      <p class="lede hero-anim hero-anim-5">
         Macro, derivativos e engenharia de portfólio com o rigor de quem precifica,
         não de quem convence. Sem simplificar pra buscar alcance.
       </p>
@@ -48,6 +49,17 @@ const STATS = [
         </div>
       ))}
     </div>
+  </section>
+
+  <section class="container-wide hierarquia-teaser-section">
+    <p class="kicker">Como pensamos</p>
+    <h2>A hierarquia que organiza cada estrutura</h2>
+    <p class="hierarquia-teaser-lede">
+      Quando variáveis entram em conflito, esta é a ordem de prioridade —
+      sempre. Uma narrativa forte nunca supera deterioração estrutural.
+    </p>
+    <HierarquiaEstrutural />
+    <a class="hierarquia-teaser-link" href="/filosofia">Ver a filosofia completa →</a>
   </section>
 
   <section class="container-wide pilares-section">
@@ -136,12 +148,43 @@ const STATS = [
     .hero-inner {
       position: relative;
     }
+    /* Fonte unica no bloco inteiro do hero (Cormorant Garamond), variando
+       so peso/itálico por elemento — nao mistura mais com a sans do resto
+       do site aqui dentro. */
+    .hero .kicker {
+      font-family: 'Cormorant Garamond', var(--font-serif);
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: 0.28em;
+    }
+    .hero-phrase {
+      font-family: 'Cormorant Garamond', var(--font-serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+      color: #fdfcf9;
+      margin: 0.15rem 0 0;
+      max-width: 32rem;
+    }
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin: 0.5rem 0 1rem;
+      font-family: 'Cormorant Garamond', var(--font-serif);
+      font-weight: 700;
+      font-style: normal;
+      font-size: clamp(2.3rem, 6vw, 3.75rem);
+      margin: 0.75rem 0 0;
+      letter-spacing: -0.01em;
+    }
+    .hero-rule {
+      width: 4.5rem;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.15rem 0 1.15rem;
+      transform-origin: left;
     }
     .lede {
-      font-size: 1.15rem;
+      font-family: 'Cormorant Garamond', var(--font-serif);
+      font-weight: 400;
+      font-size: 1.3rem;
       color: var(--text-body);
       max-width: 34rem;
     }
@@ -152,6 +195,46 @@ const STATS = [
       font-weight: 700;
     }
 
+    /* ---- Sequencia de abertura: cada elemento entra na vez, fica visivel
+       pra sempre depois (nao some). Efeito chamativo concentrado no h1
+       (fade + subida + leve escala) e no traco dourado que "desenha" logo
+       depois dele. */
+    .hero-anim {
+      opacity: 0;
+      animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-anim-1 { animation-delay: 0.05s; }
+    .hero-anim-2 { animation-delay: 0.35s; }
+    .hero-anim-3 {
+      animation-name: hero-in-title;
+      animation-delay: 0.85s;
+    }
+    .hero-rule.hero-anim-4 {
+      animation-name: hero-in-rule;
+      animation-delay: 1.55s;
+    }
+    .hero-anim-5 { animation-delay: 1.75s; }
+
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hero-in-title {
+      from { opacity: 0; transform: translateY(22px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes hero-in-rule {
+      from { opacity: 0; transform: scaleX(0); }
+      to { opacity: 1; transform: scaleX(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-anim {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     /* ---- Banda de números (esqueleto — valores reais entram depois) ---- */
     .stats-band {
       border-bottom: 1px solid var(--border);
@@ -160,7 +243,7 @@ const STATS = [
     .stats-inner {
       padding: 2.75rem 1.25rem;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
     .stat-value {
@@ -177,6 +260,27 @@ const STATS = [
     }
     @media (max-width: 720px) {
       .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1.25rem; }
+    }
+
+    /* ---- Teaser da hierarquia estrutural (reaproveita o componente da
+       página de Filosofia, só que em destaque logo na home) ---- */
+    .hierarquia-teaser-section {
+      padding: 3.5rem 1.25rem 1rem;
+    }
+    .hierarquia-teaser-section h2 {
+      margin: 0.35rem 0 0.75rem;
+      font-size: 1.5rem;
+    }
+    .hierarquia-teaser-lede {
+      color: var(--text-body);
+      max-width: 34rem;
+      margin: 0 0 0.5rem;
+    }
+    .hierarquia-teaser-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: var(--gold);
+      font-weight: 700;
     }
 
     /* ---- Grade de pilares (categorias) ---- */

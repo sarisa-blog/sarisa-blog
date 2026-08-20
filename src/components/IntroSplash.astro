@@ -1,0 +1,109 @@
+---
+// Tela de abertura full-screen, só na home, só uma vez por sessão de
+// navegador (sessionStorage). Some sozinha via animação CSS (funciona
+// mesmo sem JS); o script só adiciona o "clique pra pular" e a memória
+// de sessão como reforço progressivo.
+---
+
+<div class="intro-splash" id="intro-splash">
+  <div class="intro-inner">
+    <img src="/logo-sarisa.png" alt="Sarisa" class="intro-logo" />
+    <p class="intro-brand">SARISA</p>
+    <div class="intro-rule"></div>
+    <p class="intro-phrase">
+      Não fazemos call de mercado.<br />
+      Fazemos matemática de risco.
+    </p>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 'sarisa-intro-seen';
+    var el = document.getElementById('intro-splash');
+    if (!el) return;
+    if (sessionStorage.getItem(KEY)) {
+      el.remove();
+      return;
+    }
+    sessionStorage.setItem(KEY, '1');
+    el.addEventListener('click', function () {
+      el.classList.add('intro-skip');
+    });
+  })();
+</script>
+
+<style>
+  .intro-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    cursor: pointer;
+    animation: intro-fade 3.6s ease forwards;
+  }
+  .intro-splash.intro-skip {
+    animation: intro-fade-fast 0.5s ease forwards;
+  }
+  @keyframes intro-fade {
+    0% { opacity: 1; }
+    72% { opacity: 1; }
+    97% { opacity: 0; pointer-events: none; }
+    100% { opacity: 0; visibility: hidden; pointer-events: none; }
+  }
+  @keyframes intro-fade-fast {
+    0% { opacity: 1; }
+    85% { opacity: 0; pointer-events: none; }
+    100% { opacity: 0; visibility: hidden; pointer-events: none; }
+  }
+  .intro-inner {
+    text-align: center;
+    padding: 0 1.5rem;
+    animation: intro-rise 1.1s ease both;
+  }
+  @keyframes intro-rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .intro-logo {
+    height: 56px;
+    width: auto;
+    margin: 0 auto 1rem;
+  }
+  .intro-brand {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+  }
+  .intro-rule {
+    width: 1px;
+    height: 2.75rem;
+    background: var(--gold-dim);
+    margin: 1.5rem auto;
+  }
+  .intro-phrase {
+    margin: 0 auto;
+    max-width: 34rem;
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.6rem, 4.2vw, 2.5rem);
+    line-height: 1.35;
+    color: #fdfcf9;
+    letter-spacing: 0.01em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .intro-splash,
+    .intro-inner {
+      animation: none;
+    }
+    .intro-splash {
+      display: none;
+    }
+  }
+</style>

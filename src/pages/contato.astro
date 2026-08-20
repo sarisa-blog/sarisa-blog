@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const EMAIL = 'raphaelrojo@sarisa.com.br';
+const WHATSAPP_NUMERO = '5541999045682';
+const WHATSAPP_MSG = encodeURIComponent('Olá! Vim pelo site da Sarisa.');
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}?text=${WHATSAPP_MSG}`;
 ---
 
 <BaseLayout
@@ -16,6 +19,13 @@ const EMAIL = 'raphaelrojo@sarisa.com.br';
       quer entender se uma estrutura como as que a gente publica faz sentido pro
       seu caso, é só chamar.
     </p>
+
+    <div class="contact-card contact-card-primary">
+      <p class="contact-label">WhatsApp</p>
+      <a class="contact-value" href={WHATSAPP_URL} target="_blank" rel="noopener">
+        Falar agora →
+      </a>
+    </div>
 
     <div class="contact-card">
       <p class="contact-label">E-mail</p>
@@ -57,6 +67,9 @@ const EMAIL = 'raphaelrojo@sarisa.com.br';
       border: 1px solid var(--border);
       border-radius: 8px;
       margin-bottom: 1rem;
+    }
+    .contact-card-primary {
+      border-color: var(--gold-dim);
     }
     .contact-label {
       color: var(--text-muted);
