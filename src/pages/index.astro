@@ -15,10 +15,12 @@ const countPorCategoria = Object.fromEntries(
 );
 
 // Banda de números — valores reais confirmados pelo usuário em 19/ago/2026.
-// "Anos de atuação" tirado por enquanto (a preencher depois).
+// "Posts técnicos publicados" é contagem real do blog (allPosts.length),
+// não é estimativa. "Anos de atuação" e outros ainda a preencher.
 const STATS = [
   { label: 'Patrimônio sob consultoria', value: 'R$103M+' },
   { label: 'Estruturas desenhadas', value: '1.078' },
+  { label: 'Posts técnicos publicados', value: String(allPosts.length) },
 ];
 ---
 
@@ -236,8 +238,19 @@ const STATS = [
     .stats-inner {
       padding: 2.75rem 1.25rem;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+      justify-content: center;
+      gap: 2rem 3rem;
+      max-width: 50rem;
+      margin: 0 auto;
+    }
+    .stat {
+      text-align: center;
+      padding: 0 1.5rem;
+      border-left: 1px solid var(--border);
+    }
+    .stat:first-child {
+      border-left: none;
     }
     .stat-value {
       font-size: 2.1rem;
@@ -253,6 +266,7 @@ const STATS = [
     }
     @media (max-width: 720px) {
       .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1.25rem; }
+      .stat { border-left: none; padding: 0; text-align: left; }
     }
 
     /* ---- Teaser da hierarquia estrutural (reaproveita o componente da
