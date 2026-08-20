@@ -137,7 +137,14 @@ const STATS = [
       background-color: var(--bg);
     }
     @media (max-width: 640px) {
-      .hero { min-height: 60vh; }
+      .hero {
+        min-height: 92vh;
+        align-items: center;
+        padding: 6rem 0 3rem;
+      }
+      .hero .kicker {
+        display: none;
+      }
     }
     .hero-overlay {
       position: absolute;
