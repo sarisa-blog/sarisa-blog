@@ -110,14 +110,14 @@ const SOBRE_TEXTO =
   }
   .ep-diagram {
     position: relative;
-    width: min(480px, 92vw);
+    width: min(480px, 96vw);
     aspect-ratio: 1 / 1;
     background: none;
     border: none;
     padding: 0;
     margin: 1rem 0;
     cursor: pointer;
-    display: none; /* ligado so a partir do breakpoint abaixo */
+    display: block;
   }
   .ep-lines {
     position: absolute;
@@ -184,17 +184,18 @@ const SOBRE_TEXTO =
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    line-height: 1.25;
+    line-height: 1.2;
     pointer-events: none;
+    max-width: 5.4rem;
   }
   .ep-label-name {
     color: var(--gold);
     font-weight: 700;
-    font-size: 0.92rem;
+    font-size: clamp(0.66rem, 2.6vw, 0.92rem);
   }
   .ep-label-count {
     color: var(--text-muted);
-    font-size: 0.72rem;
+    font-size: clamp(0.58rem, 2vw, 0.72rem);
   }
   .ep-label-left { align-items: flex-start; text-align: left; }
   .ep-label-right { align-items: flex-end; text-align: right; }
@@ -233,10 +234,10 @@ const SOBRE_TEXTO =
     font-size: 0.92rem;
   }
 
-  /* fallback em grade — visivel por padrao (mobile-first), some quando o
-     diagrama radial liga */
+  /* fallback em grade — só entra em telas muito estreitas (< 360px),
+     onde nem com fonte reduzida os 6 rótulos cabem ao redor do círculo */
   .ep-grid-fallback {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     margin-top: 1.5rem;
@@ -266,11 +267,10 @@ const SOBRE_TEXTO =
     color: var(--gold-dim);
   }
 
-  /* diagrama radial só a partir daqui — embaixo disso o circulo fica
-     apertado demais pros rotulos (6 labels, alguns compridos) */
-  @media (min-width: 760px) {
-    .ep-diagram { display: block; }
-    .ep-grid-fallback { display: none; }
+  /* rede de seguranca só pra telas muito estreitas */
+  @media (max-width: 359px) {
+    .ep-diagram { display: none; }
+    .ep-grid-fallback { display: grid; }
   }
 
   @media (prefers-reduced-motion: reduce) {
