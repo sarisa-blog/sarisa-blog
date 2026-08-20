@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { CATEGORIAS, CATEGORIA_SLUGS } from '../lib/categorias';
+import { CATEGORIA_SLUGS } from '../lib/categorias';
 import HierarquiaEstrutural from '../components/HierarquiaEstrutural.astro';
+import EngenhariaPortfolio from '../components/EngenhariaPortfolio.astro';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 5);
@@ -62,22 +63,7 @@ const STATS = [
     <a class="hierarquia-teaser-link" href="/filosofia">Ver a filosofia completa →</a>
   </section>
 
-  <section class="container-wide pilares-section">
-    <p class="kicker">O que cobrimos</p>
-    <h2>Pilares</h2>
-    <div class="pilares-grid">
-      {CATEGORIA_SLUGS.map((slug) => {
-        const n = countPorCategoria[slug];
-        return (
-          <a class="pilar-card" href={`/blog/categoria/${slug}/`}>
-            <span class="pilar-label">{CATEGORIAS[slug]}</span>
-            <span class="pilar-count">{n > 0 ? `${n} post${n === 1 ? '' : 's'}` : 'em breve'}</span>
-            <span class="pilar-arrow">→</span>
-          </a>
-        );
-      })}
-    </div>
-  </section>
+  <EngenhariaPortfolio countPorCategoria={countPorCategoria} />
 
   <section class="container">
     <h2>Últimos posts</h2>
@@ -272,7 +258,7 @@ const STATS = [
     /* ---- Teaser da hierarquia estrutural (reaproveita o componente da
        página de Filosofia, só que em destaque logo na home) ---- */
     .hierarquia-teaser-section {
-      padding: 3.5rem 1.25rem 1rem;
+      padding: 6.5rem 1.25rem 1rem;
     }
     .hierarquia-teaser-section h2 {
       margin: 0.35rem 0 0.75rem;
@@ -288,61 +274,6 @@ const STATS = [
       margin-top: 0.5rem;
       color: var(--gold);
       font-weight: 700;
-    }
-
-    /* ---- Grade de pilares (categorias) ---- */
-    .pilares-section {
-      padding: 3.5rem 1.25rem 1rem;
-    }
-    .pilares-section h2 {
-      margin: 0.35rem 0 1.5rem;
-    }
-    .pilares-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-    .pilar-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 1.4rem 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: #fff;
-      background: var(--bg-elevated);
-      transition: border-color 0.15s ease, background 0.15s ease;
-    }
-    .pilar-card:hover {
-      text-decoration: none;
-      border-color: var(--gold-dim);
-      background: var(--bg-card);
-    }
-    .pilar-card:hover .pilar-label {
-      color: var(--gold);
-    }
-    .pilar-label {
-      font-weight: 700;
-      font-size: 1.02rem;
-      transition: color 0.15s ease;
-    }
-    .pilar-count {
-      color: var(--text-muted);
-      font-size: 0.78rem;
-      white-space: nowrap;
-      margin-right: 0.25rem;
-    }
-    .pilar-arrow {
-      color: var(--gold-dim);
-      font-size: 1rem;
-    }
-    @media (max-width: 860px) {
-      .pilares-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 560px) {
-      .pilares-grid { grid-template-columns: 1fr; }
-      .pilar-card { flex-wrap: wrap; }
     }
 
     section.container {

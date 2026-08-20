@@ -1,0 +1,279 @@
+---
+// Substitui a grade plana de pilares por uma esfera central (efeito
+// metálico via CSS, sem lib 3D) com linhas radiais até cada pilar,
+// inspirado no diagrama 360° da referência — mas interativo: clicar na
+// esfera revela o texto "sobre a Sarisa" dentro do próprio bloco.
+import { CATEGORIAS, CATEGORIA_SLUGS } from '../lib/categorias';
+
+interface Props {
+  countPorCategoria: Record<string, number>;
+}
+const { countPorCategoria } = Astro.props;
+
+const N = CATEGORIA_SLUGS.length;
+const RADIUS = 40; // % do container (centro = 50,50)
+const pontos = CATEGORIA_SLUGS.map((slug, i) => {
+  const angleDeg = -90 + (360 / N) * i; // comeca no topo, sentido horario
+  const rad = (angleDeg * Math.PI) / 180;
+  const x = 50 + RADIUS * Math.cos(rad);
+  const y = 50 + RADIUS * Math.sin(rad);
+  // ancora o texto pro lado certo dependendo de onde cai no circulo
+  let align: 'left' | 'right' | 'center' = 'center';
+  if (Math.cos(rad) > 0.35) align = 'left';
+  else if (Math.cos(rad) < -0.35) align = 'right';
+  return { slug, label: CATEGORIAS[slug], n: countPorCategoria[slug], x, y, align };
+});
+
+const SOBRE_TEXTO =
+  'A Sarisa trabalha com macro, derivativos e engenharia de portfólio pra quem já entende o básico ' +
+  'e quer profundidade, não simplificação. Toda estrutura que aparece aqui vem acompanhada do ' +
+  'cenário em que ela não funciona, não só do payoff bonito. Conteúdo técnico denso não busca ' +
+  'alcance fácil — busca quem já opera, já tem patrimônio pra proteger ou construir, e quer entender ' +
+  'a mecânica real por trás da estrutura.';
+---
+
+<section class="ep-section">
+  <p class="kicker">O que cobrimos</p>
+  <h2>Engenharia de Portfólio</h2>
+  <p class="ep-hint">Clique na esfera pra ver o que isso significa na prática.</p>
+
+  <div class="ep-wrap">
+    <button type="button" class="ep-diagram" id="ep-diagram" aria-expanded="false" aria-controls="ep-panel">
+      <svg class="ep-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        {pontos.map((p) => (
+          <line x1="50" y1="50" x2={p.x} y2={p.y} class="ep-line" />
+        ))}
+      </svg>
+      <span class="ep-sphere"><span class="ep-sphere-core"></span></span>
+      {pontos.map((p) => (
+        <span
+          class={`ep-label ep-label-${p.align}`}
+          style={`left:${p.x}%; top:${p.y}%;`}
+        >
+          <span class="ep-label-name">{p.label}</span>
+          <span class="ep-label-count">{p.n > 0 ? `${p.n} post${p.n === 1 ? '' : 's'}` : 'em breve'}</span>
+        </span>
+      ))}
+    </button>
+  </div>
+
+  <div class="ep-panel" id="ep-panel">
+    <p class="ep-panel-kicker">Engenharia de Portfólio</p>
+    <p class="ep-panel-text">{SOBRE_TEXTO}</p>
+    <a class="ep-panel-link" href="/sobre">Ver a página completa →</a>
+  </div>
+
+  <!-- fallback simples pra telas pequenas, onde o diagrama radial nao cabe -->
+  <div class="ep-grid-fallback">
+    {pontos.map((p) => (
+      <a class="ep-fallback-card" href={`/blog/categoria/${p.slug}/`}>
+        <span class="ep-fallback-label">{p.label}</span>
+        <span class="ep-fallback-count">{p.n > 0 ? `${p.n} post${p.n === 1 ? '' : 's'}` : 'em breve'}</span>
+        <span class="ep-fallback-arrow">→</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('ep-diagram');
+    var panel = document.getElementById('ep-panel');
+    if (!btn || !panel) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.classList.toggle('ep-panel-open', !open);
+    });
+  })();
+</script>
+
+<style>
+  .ep-section {
+    padding: 4.5rem 1.25rem 1rem;
+    max-width: var(--wide-w);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ep-section h2 {
+    margin: 0.35rem 0 0.4rem;
+  }
+  .ep-hint {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+  }
+
+  .ep-wrap {
+    display: flex;
+    justify-content: center;
+  }
+  .ep-diagram {
+    position: relative;
+    width: min(480px, 92vw);
+    aspect-ratio: 1 / 1;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 1rem 0;
+    cursor: pointer;
+    display: none; /* ligado so a partir do breakpoint abaixo */
+  }
+  .ep-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .ep-line {
+    stroke: var(--gold-dim);
+    stroke-width: 0.3;
+    opacity: 0.55;
+    transition: stroke 0.2s ease, opacity 0.2s ease;
+  }
+  .ep-diagram:hover .ep-line {
+    stroke: var(--gold);
+    opacity: 0.85;
+  }
+
+  .ep-sphere {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 27%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, #f7f6f2 0%, #dedbd0 20%, #b7b3a3 42%, #85816f 64%, #4c493d 84%, #211f19 100%);
+    box-shadow:
+      0 0 2.5rem rgba(191, 174, 130, 0.28),
+      inset -0.7rem -0.7rem 1.8rem rgba(0, 0, 0, 0.55),
+      inset 0.5rem 0.5rem 1.2rem rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .ep-diagram:hover .ep-sphere,
+  .ep-diagram[aria-expanded='true'] .ep-sphere {
+    transform: translate(-50%, -50%) scale(1.06);
+    box-shadow:
+      0 0 3.5rem rgba(191, 174, 130, 0.45),
+      inset -0.7rem -0.7rem 1.8rem rgba(0, 0, 0, 0.55),
+      inset 0.5rem 0.5rem 1.2rem rgba(255, 255, 255, 0.25);
+  }
+  .ep-sphere-core {
+    position: absolute;
+    inset: -20%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.5) 18deg,
+      transparent 55deg,
+      transparent 320deg,
+      rgba(255, 255, 255, 0.18) 345deg,
+      transparent 360deg
+    );
+    mix-blend-mode: overlay;
+    animation: ep-shine 5s linear infinite;
+  }
+  @keyframes ep-shine {
+    to { transform: rotate(360deg); }
+  }
+
+  .ep-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    pointer-events: none;
+  }
+  .ep-label-name {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .ep-label-count {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+  .ep-label-left { align-items: flex-start; text-align: left; }
+  .ep-label-right { align-items: flex-end; text-align: right; }
+  .ep-label-center { align-items: center; text-align: center; }
+
+  .ep-panel {
+    max-width: 38rem;
+    margin: 0.5rem auto 0;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+    text-align: left;
+  }
+  .ep-panel-open {
+    max-height: 22rem;
+    opacity: 1;
+    margin: 1.5rem auto 0;
+  }
+  .ep-panel-kicker {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+  .ep-panel-text {
+    color: var(--text-body);
+    font-size: 1.02rem;
+    margin: 0 0 0.75rem;
+  }
+  .ep-panel-link {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+
+  /* fallback em grade — visivel por padrao (mobile-first), some quando o
+     diagrama radial liga */
+  .ep-grid-fallback {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  .ep-fallback-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #fff;
+    background: var(--bg-elevated);
+  }
+  .ep-fallback-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .ep-fallback-count {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+  .ep-fallback-arrow {
+    color: var(--gold-dim);
+  }
+
+  /* diagrama radial só a partir daqui — embaixo disso o circulo fica
+     apertado demais pros rotulos (6 labels, alguns compridos) */
+  @media (min-width: 760px) {
+    .ep-diagram { display: block; }
+    .ep-grid-fallback { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ep-sphere-core { animation: none; }
+  }
+</style>
