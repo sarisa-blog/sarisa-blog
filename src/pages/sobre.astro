@@ -3,84 +3,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Sobre"
-  description="A Sarisa existe pra ler risco antes que ele vire manchete: macro, derivativos e engenharia de portfólio com rigor matemático, não narrativa de venda."
+  title="Metodologia"
+  description="Metodologia Sarisa — página em construção."
 >
   <div class="container">
     <p class="kicker">Sarisa</p>
-    <h1>Estrutura acima de narrativa.</h1>
-
-    <div class="prose">
-      <p>
-        A Sarisa trabalha com macro, derivativos e engenharia de portfólio pra quem
-        já entende o básico e quer profundidade, não simplificação. Não existe
-        aqui a promessa de "método infalível" ou call de mercado fácil. Existe
-        rigor: rodar Black-Scholes com juro e dividendo reais antes de cravar
-        custo de uma estrutura, segurar a Selic no nível atual em vez de projetar
-        queda que ainda não aconteceu, citar a fonte de cada número antes de
-        fechar uma tese.
-      </p>
-
-      <h2>Como pensamos</h2>
-      <p>
-        Toda estrutura de opções que aparece aqui vem acompanhada do cenário em
-        que ela <em>não</em> funciona, não só do payoff bonito. Achamos que isso é
-        o mínimo pra um conteúdo que mexe com dinheiro de verdade. Prêmios
-        marcados como exemplo são exemplos, não recomendação. Isso fica
-        explícito em cada post, não escondido em letra miúda.
-      </p>
-
-      <h2>Pra quem é</h2>
-      <p>
-        Conteúdo técnico denso não busca alcance fácil. Busca quem já opera,
-        já tem patrimônio pra proteger ou construir, e quer entender a mecânica
-        real por trás da estrutura, não só o resultado prometido. Se isso é
-        você, provavelmente vamos falar a mesma língua.
-      </p>
-      <p>
-        Pra entender de onde vem esse rigor e os princípios que guiam cada
-        estrutura que desenhamos, veja nossa <a href="/filosofia">página de
-        filosofia</a>.
-      </p>
-    </div>
-
-    <div class="cta-box">
-      <p class="cta-kicker">Quer conversar sobre uma estrutura específica?</p>
-      <a class="cta-link" href="/contato">Fala com a Sarisa →</a>
-    </div>
+    <h1>Metodologia</h1>
+    <p class="building">Página em construção.</p>
   </div>
 
   <style>
     .container {
-      padding: 3rem 0 4rem;
+      padding: 3rem 0 6rem;
       max-width: var(--content-w);
+      min-height: 40vh;
     }
     h1 {
       font-size: clamp(1.75rem, 4vw, 2.5rem);
-      margin: 0.5rem 0 2rem;
+      margin: 0.5rem 0 1.5rem;
     }
-    .prose h2 {
-      margin-top: 2.5rem;
-      font-size: 1.35rem;
-    }
-    .prose p {
-      font-size: 1.05rem;
-      margin: 1.1rem 0;
-    }
-    .cta-box {
-      margin-top: 3rem;
-      padding: 1.75rem;
-      background: var(--bg-elevated);
-      border-left: 3px solid var(--gold);
-    }
-    .cta-kicker {
-      color: var(--text-body);
-      margin: 0 0 0.5rem;
-    }
-    .cta-link {
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 1.05rem;
+    .building {
+      color: var(--text-muted);
+      font-size: 1.1rem;
     }
   </style>
 </BaseLayout>
